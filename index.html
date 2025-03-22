@@ -5,23 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors - Python</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.11.3/brython.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.11.3/brython_stdlib.js"></script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; text-align: left; overflow-x: auto; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; text-align: left; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
         #output { margin-top: 20px; white-space: pre-line; text-align: left; }
-        .footer { margin-top: 30px; font-size: 16px; font-weight: bold; }
-        .linkedin-button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #0077b5;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .linkedin-button:hover { background-color: #005a8e; }
     </style>
 </head>
 <body onload="brython()">
@@ -81,16 +70,16 @@ else:
     print(\"You lose 😢\")
     </pre>
 
-    <button onclick="runPython()">Run Python Code</button>
+    <button id="runPython">Run Python Code</button>
 
     <h3>Output:</h3>
     <div id="output"></div>
 
     <script type="text/python">
 import random
-from browser import document, html, window
+from browser import document
 
-def runPython():
+def runPython(event):
     output = document["output"]
     output.text = ""
 
@@ -118,7 +107,7 @@ def runPython():
  ----- 
 \"\"\"
 
-    user1 = window.prompt("Choose Stone, Paper, or Scissors (ST/P/S)").strip().upper()
+    user1 = document.select("#runPython")[0].text.strip().upper()
 
     if user1 == "ST":
         user2 = stone
@@ -145,14 +134,13 @@ def runPython():
     else:
         output.text += "You lose 😢"
 
-document["runPython"] = runPython
+document["runPython"].bind("click", runPython)
     </script>
 
-    <div class="footer">
-        Made by Kartike Raj Choudhary
-        <br>
-        <a class="linkedin-button" href="https://www.linkedin.com/in/kartike-raj-choudhary/" target="_blank">Connect on LinkedIn</a>
-    </div>
+    <h3>Made by Kartike Raj Choudhary</h3>
+    <a href="https://www.linkedin.com/in/kartike-raj-choudhary/" target="_blank">
+        <button>Connect with me on LinkedIn</button>
+    </a>
 
 </body>
 </html>
